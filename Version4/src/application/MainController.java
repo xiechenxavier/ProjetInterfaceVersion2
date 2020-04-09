@@ -175,23 +175,24 @@ public class MainController implements Initializable{
 	}
 
 	public void ManipulerFigure(ActionEvent e) {
-		String manipuleOption=cbb.getSelectionModel().getSelectedItem().toString();
+		if(this.Selectionner.isSelected()) {
+			String manipuleOption=cbb.getSelectionModel().getSelectedItem().toString();
+			if(manipuleOption.equals("Deplacer")) {
+				//
+				//			mainCanvas.setOnMouseClicked(eventP->mp.ClickChoose(eventP));//点击即选中图形
 
-		if(manipuleOption.equals("Deplacer")) {
-			//
-			mainCanvas.setOnMouseClicked(eventP->mp.ClickChoose(eventP));//点击即选中图形
-			
-			mainCanvas.setOnMousePressed(eventP -> mp.Pressed(eventP));
-			
-			mainCanvas.setOnMouseReleased(eventP->mp.lacher());//松开即停止拖动
-			
-			mainCanvas.setOnMouseDragged(eventP->mp.dragFigure(eventP));//拖动图形
-		}else if(manipuleOption.equals("ReSize")){
-			
-		}else if(manipuleOption.equals("Flotter")) {
-			
-		}else if(manipuleOption.equals("Couler")) {
-			
+				mainCanvas.setOnMousePressed(eventP -> mp.Pressed(eventP));
+
+				mainCanvas.setOnMouseReleased(eventP->mp.lacher());//松开即停止拖动
+
+				mainCanvas.setOnMouseDragged(eventP->mp.dragFigure(eventP));//拖动图形
+			}else if(manipuleOption.equals("ReSize")){
+
+			}else if(manipuleOption.equals("Flotter")) {
+
+			}else if(manipuleOption.equals("Couler")) {
+
+			}
 		}
 	}
 
@@ -208,15 +209,15 @@ public class MainController implements Initializable{
 			mainCanvas.setOnMouseDragged(null);
 		}
 	}
-	
+
 	public void ChoisirColor(ActionEvent e) {
-			Color c=setColor.getValue();
-			FigureColoree figureCourant=this.fm.getFigureenCours();//获得当前的图形
-			figureCourant.changeColor(c);
-			mp.upDateColor(c);
-			if(mp.getUpdatable()) {
-				ff.EffaceretDessiner();
-			}
+		Color c=setColor.getValue();
+		FigureColoree figureCourant=this.fm.getFigureenCours();//获得当前的图形
+		figureCourant.changeColor(c);
+		mp.upDateColor(c);
+		if(mp.getUpdatable()) {
+			ff.EffaceretDessiner();
+		}
 	}
 	public void EffacerLaPanel(ActionEvent e) {
 		gc.clearRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
