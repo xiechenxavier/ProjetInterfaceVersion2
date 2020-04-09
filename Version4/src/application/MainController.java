@@ -104,9 +104,10 @@ public class MainController implements Initializable{
 		Circle.setStyle("-fx-background-color: white");
 		//		mainCanvas.setStyle("-fx-background-color: white");
 		setColor.setValue(Color.BLACK);
-		ObservableList<String> List=FXCollections.observableArrayList("Option","Deplacer","ReSize","突出","淡出","setColor");
+		ObservableList<String> List=FXCollections.observableArrayList("Option","Deplacer","ReSize","Flotter","Couler");
 		cbb.getItems().addAll(List);
 		cbb.setPrefWidth(97);
+		cbb.setValue("Option");//默认值为请做出选择--当前的情况没有任何操作图形的功能
 	}
 
 	public MainController() {
@@ -127,7 +128,9 @@ public class MainController implements Initializable{
 
 
 	public void choix(ActionEvent e) {
-
+		this.Selectionner.setSelected(false);
+		mainCanvas.setOnMouseClicked(null);//选择画图形的功能的时候是为了放止与操作图形的功能出现重复的效果
+		this.cbb.setValue("Option");//让操作功能回复到初始化的状态
 		if(e.getSource()==Pinceau) {
 			mainCanvas.setOnMousePressed(eventP -> 
 
@@ -176,22 +179,34 @@ public class MainController implements Initializable{
 
 		if(manipuleOption.equals("Deplacer")) {
 			//
-			mainCanvas.setOnMouseClicked(eventP->mp.ClickChoose(eventP));
+			mainCanvas.setOnMouseClicked(eventP->mp.ClickChoose(eventP));//点击即选中图形
+			
 			mainCanvas.setOnMousePressed(eventP -> mp.Pressed(eventP));
-			mainCanvas.setOnMouseReleased(eventP->mp.lacher());
-			//
-			mainCanvas.setOnMouseDragged(eventP->mp.dragFigure(eventP));
+			
+			mainCanvas.setOnMouseReleased(eventP->mp.lacher());//松开即停止拖动
+			
+			mainCanvas.setOnMouseDragged(eventP->mp.dragFigure(eventP));//拖动图形
+		}else if(manipuleOption.equals("ReSize")){
+			
+		}else if(manipuleOption.equals("Flotter")) {
+			
+		}else if(manipuleOption.equals("Couler")) {
+			
 		}
 	}
 
 	public void Selected(ActionEvent e) {
-//		if(this.Selectionner.isSelected()) {
-//			mainCanvas.setOnMouseClicked(eventP->mp.ClickChoose(eventP));
-//			mainCanvas.setOnMousePressed(null);
-//			mainCanvas.setOnMouseReleased(null);
-//			mainCanvas.setOnMouseDragged(null);
-////			this.mp.Updatable(true);
-//		}
+		if(this.Selectionner.isSelected()) {//当CheckBox被选择的时候，表示可以开始操作了
+			mainCanvas.setOnMouseClicked(eventP->mp.ClickChoose(eventP));
+			mainCanvas.setOnMousePressed(null);
+			mainCanvas.setOnMouseReleased(null);
+			mainCanvas.setOnMouseDragged(null);
+		}else {//没被选择图形时，没有任何对图形的动作
+			mainCanvas.setOnMouseClicked(null);
+			mainCanvas.setOnMousePressed(null);
+			mainCanvas.setOnMouseReleased(null);
+			mainCanvas.setOnMouseDragged(null);
+		}
 	}
 	
 	public void ChoisirColor(ActionEvent e) {
@@ -199,6 +214,9 @@ public class MainController implements Initializable{
 			FigureColoree figureCourant=this.fm.getFigureenCours();//获得当前的图形
 			figureCourant.changeColor(c);
 			mp.upDateColor(c);
+			if(mp.getUpdatable()) {
+				ff.EffaceretDessiner();
+			}
 	}
 	public void EffacerLaPanel(ActionEvent e) {
 		gc.clearRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());

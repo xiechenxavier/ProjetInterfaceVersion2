@@ -71,7 +71,7 @@
                               <TextField fx:id="TextField" layoutX="66.0" layoutY="60.0" prefHeight="14.0" prefWidth="29.0" />
                               <Label layoutX="101.0" layoutY="65.0" text="pk" />
                               <Label layoutX="4.0" layoutY="140.0" text="Action锛�" />
-                              <ComboBox fx:id="cbb" layoutX="72.0" layoutY="134.0" onAction="#ManipulerFigure" prefHeight="27.0" prefWidth="89.0" />
+                              <ComboBox fx:id="cbb" layoutX="64.0" layoutY="134.0" onAction="#ManipulerFigure" prefHeight="27.0" prefWidth="89.0" />
                               <ColorPicker fx:id="setColor" layoutX="76.0" layoutY="22.0" onAction="#ChoisirColor" prefHeight="27.0" prefWidth="85.0" />
                               <CheckBox fx:id="Selectionner" layoutX="15.0" layoutY="101.0" mnemonicParsing="false" onAction="#Selected" text="Selected" />
                            </children>

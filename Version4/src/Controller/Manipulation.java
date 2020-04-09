@@ -42,6 +42,8 @@ public class Manipulation {
 				forms.get(i).setEnSelection(true);
 				isAccesse=true;
 				((Polygone)forms.get(i)).afficher(MainController.gc);
+				this.Updatable(true);//可以更改颜色
+				this.FormId=i;
 				break;
 			}
 		}
@@ -60,7 +62,7 @@ public class Manipulation {
 		for(int i=0;i<forms.size();i++) {
 			if(forms.get(i)!=null&&((Polygone)forms.get(i)).Accesseur(sourisX, sourisY)){
 				this.daplacable(true);//可以拖动图形
-				this.Updatable(true);//可以更改颜色
+//				this.Updatable(true);//可以更改颜色
 				FormId=i;
 				break;
 			}
@@ -84,6 +86,7 @@ public class Manipulation {
 			this.ff.EffaceretDessiner();
 		}
 	}
+	
 	public void lacher() {//释放鼠标时，不继续拖动
 		this.daplacable(false);
 	}
